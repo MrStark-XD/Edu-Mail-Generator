@@ -22,7 +22,7 @@ finally:
 ######## use it on your own RISK ########
 ######## I'm not responsible for any loss or damage ########
 ######## caused to you using this script ########
-######## Github Repo - https://github.com/the-avengersz/Edu-Mail-Generator ########
+######## Github Repo - https://github.com/MrStark-XD/Edu-Mail-Generator/ ########
 
 def os_arch():
     os_arch = '32'
