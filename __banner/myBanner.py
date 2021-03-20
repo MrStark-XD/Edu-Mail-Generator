@@ -9,7 +9,7 @@ def bannerTop():
 |  _| / _` | | | | | |\/| |/ _` | | | | |  _ / _ \ '_ \\
 | |__| (_| | |_| | | |  | | (_| | | | | |_| |  __/ | | |_
 |_____\__,_|\__,_| |_|  |_|\__,_|_|_|  \____|\___|_| |_(_)
-Github Repo - https://github.com/the-avengersz/Edu-Mail-Generator\n\n
+Github Repo - https://github.com/MrStark-XD/Edu-Mail-Generator/\n\n
 '''
 
     bad_colors = ['BLACK', 'WHITE', 'LIGHTBLACK_EX', 'RESET']
