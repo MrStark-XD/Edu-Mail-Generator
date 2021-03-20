@@ -5,7 +5,7 @@ import random
 ######## use it on your own RISK ########
 ######## I'm not responsible for any loss or damage ########
 ######## caused to you using this script ########
-######## Github Repo - https://github.com/the-avengersz/Edu-Mail-Generator ########
+######## Github Repo - https://github.com/MrStark-XD/Edu-Mail-Generator/ ########
 
 start_url = 'https://www.opencccapply.net/gateway/apply?cccMisCode='
 
