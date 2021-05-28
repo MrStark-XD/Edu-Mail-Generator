@@ -76,4 +76,4 @@ Travis CI: Access the Private builds that charge you $69 per month, while you ar
 
 
 ## Original Repositor :
-> https://github.com/c9ffin/rdp
+> https://github.com/MrStark-XD/Edu-Mail-Generator
