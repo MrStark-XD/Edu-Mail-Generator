@@ -1,6 +1,8 @@
 # Edu-Mail-Generator
 Generate Free Edu Mail(s) within minutes
 
+Currently this bot can create 20 Different Clg edu mails.
+
 ## Only For Educational Purpose ##
 ## ***Requirements***
 
