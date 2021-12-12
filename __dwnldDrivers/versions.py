@@ -22,7 +22,7 @@ finally:
 ######## use it on your own RISK ########
 ######## I'm not responsible for any loss or damage ########
 ######## caused to you using this script ########
-######## Github Repo - https://github.com/MrStark-XD/Edu-Mail-Generator/ ########
+######## Github Repo - https://github.com/MrStark-XD/Edu-Mail-Generator ########
 
 def os_arch():
     os_arch = '32'
@@ -110,7 +110,12 @@ def get_chrome_version():
                 version = proc.stdout.read().decode('utf-8').replace('Chromium', '').strip()
                 version = version.replace('Google Chrome', '').strip()
         except:
-            return None
+            try:
+                with subprocess.Popen(['chromium', '--version'], stdout=subprocess.PIPE) as proc:
+                    version = proc.stdout.read().decode('utf-8').split(' ')[1]
+                    return version
+            except:
+                return None
     elif platform == 'mac':
         try:
             process = subprocess.Popen(['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '--version'], stdout=subprocess.PIPE)
