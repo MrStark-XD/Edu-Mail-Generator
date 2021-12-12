@@ -4,25 +4,24 @@ import string
 import random
 import sys
 import colorama
-from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from seleniumwire import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+import seleniumwire.undetected_chromedriver.v2 as uc
 from random import randint
 from __constants.const import *
 from __banner.myBanner import bannerTop
 from __colors__.colors import *
+from helper import EduHelper
 
 ######## This script is only for educational purpose ########
 ######## use it on your own RISK ########
 ######## I'm not responsible for any loss or damage ########
 ######## caused to you using this script ########
-######## Github Repo - https://github.com/MrStark-XD/Edu-Mail-Generator/ ########
+######## Github Repo - https://github.com/MrStark-XD/Edu-Mail-Generator ########bannerTop
 
 def postFix(n):
     range_start = 10**(n-1)
@@ -37,7 +36,15 @@ def random_phone_num_generator():
         last = (str(random.randint(1, 9998)).zfill(4))
     return '{}-{}-{}'.format(first, second, last)
 
-def start_bot(start_url, email, college, collegeID):
+def interceptor(request):
+    if request.method == 'POST' and request.url == 'https://www.openccc.net/f-vs-stand-I-hat-of-yout-ands-Banquoh-Cumberland?d=www.openccc.net':
+        request.abort(403)
+
+def start_bot(start_url, email, college, collegeID, cookies, token):
+
+    print(fc + sd + '[' + fm + sb + '*' + fc + sd + '] ' + fg + 'Parsing Incap Cookies (success)')
+    cookies['reese84'] = token
+
     studentPhone = random_phone_num_generator()
 
     ex_split = studentAddress.split("\n")
@@ -64,16 +71,15 @@ def start_bot(start_url, email, college, collegeID):
 
     fp = open('prefBrowser.txt', 'r')
     typex = fp.read()
-
     try:
         # For Chrome
         if typex == 'chrome':
             driver = webdriver.Chrome(executable_path=r'./webdriver/chromedriver')
         # For Firefox
         elif typex == 'firefox':
-            # cap = DesiredCapabilities().FIREFOX
-            # cap['marionette'] = True
             driver = webdriver.Firefox(executable_path=r'./webdriver/geckodriver')
+        elif typex == 'chrome_undetected':
+            driver = uc.Chrome()
         elif typex == '':
             print(fr + 'Error - Run setup.py first')
             exit()
@@ -81,19 +87,47 @@ def start_bot(start_url, email, college, collegeID):
         time.sleep(0.4)
         print('\n' + fr + 'Error - '+ str(e))
         exit()
-    
+    driver.request_interceptor = interceptor
+    print(fc + sd + '[' + fm + sb + '*' + fc + sd + '] ' + fg + 'Interceptor Addition (success)')
     driver.maximize_window()
+
+    driver.get('https://www.openccc.net')
+    print(fc + sd + '[' + fm + sb + '*' + fc + sd + '] ' + fg + 'Injecting Incap Cookies', end='')
+    for cookie in cookies.keys():
+        ck = {'name': cookie, 'value': cookies[cookie], 'domain': '.openccc.net'}
+        driver.add_cookie(ck)
+    print(fg + ' (success)')
+
+    print('\n' + fc + sd + '[' + fm + sb + '*' + fc + sd + '] ' + fg + 'Incapsula Bypass Successfull')
+
+
+    print('\n' + fc + sd + '[' + fm + sb + '*' + fc + sd + '] ' + fg + 'Hold on Starting now, Keep checking this terminal for instructions')
+    
+
     driver.get(start_url)
 
     time.sleep(1)
 
-    driver.find_element_by_xpath('//*[@id="portletContent_u16l1n18"]/div/div[2]/div/a[2]').click()
+    # extra_click = 0
 
-    time.sleep(1)
+    # try:
+    #     WebDriverWait(driver, 5).until(
+    #         EC.presence_of_element_located((By.CLASS_NAME, "instructions"))
+    #     ).click()
+    #     extra_click = 1
+    # except:
+    #     extra_click = 0
+    
+    try:
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "inputFirstName"))
+        )
+    except:
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "accountFormSubmit"))
+        ).click()
 
-    WebDriverWait(driver, 60).until(
-        EC.presence_of_element_located((By.ID, "accountFormSubmit"))
-    ).click()
+    time.sleep(5)
 
     print(fc + sd + '[' + fm + sb + '*' + fc + sd + '] ' + fy + 'Account Progress - 1/3', end='')
 
@@ -443,10 +477,21 @@ def start_bot(start_url, email, college, collegeID):
 
         time.sleep(0.7)
 
+
         WebDriverWait(driver, 60).until(
             EC.element_to_be_clickable(
                 (By.CSS_SELECTOR, '#inputEduGoal option[value="B"]'))
         ).click()
+
+        time.sleep(0.7)
+
+        try:
+            time.sleep(1)
+            dropdown_menu = Select(driver.find_element_by_id('inputMajorCategory'))
+            dropdown_menu.select_by_index(random.randint(1, 7))
+            time.sleep(0.7)
+        except:
+            pass
 
         time.sleep(2)
 
@@ -650,11 +695,21 @@ def start_bot(start_url, email, college, collegeID):
             EC.element_to_be_clickable((By.ID, 'inputCaRes2YearsYes'))
         ).click()
 
-        time.sleep(1)
+        try:
+            element = driver.find_element_by_id('inputHomelessYouthNo')
+            desired_y = (element.size['height'] / 2) + element.location['y']
+            window_h = driver.execute_script('return window.innerHeight')
+            window_y = driver.execute_script('return window.pageYOffset')
+            current_y = (window_h / 2) + window_y
+            scroll_y_by = desired_y - current_y
 
-        WebDriverWait(driver, 60).until(
-            EC.element_to_be_clickable((By.ID, 'inputHomelessYouthNo'))
-        ).click()
+            time.sleep(1)
+
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.ID, 'inputHomelessYouthNo'))
+            ).click()
+        except:
+            pass
 
         time.sleep(1)
 
@@ -938,6 +993,78 @@ def start_bot(start_url, email, college, collegeID):
 
             driver.find_element_by_name("_eventId_continue").click()
         
+        elif collegeID == 5:
+            try:
+                element = WebDriverWait(driver, 60).until(
+                    EC.presence_of_element_located((By.ID, "_supp_MENU_1"))
+                )
+            except:
+                pass
+
+            FA = Select(driver.find_element_by_id('_supp_MENU_1'))
+            FA.select_by_value('B')
+            time.sleep(2)
+
+            PG = Select(driver.find_element_by_id('_supp_MENU_2'))
+            PG.select_by_value('B')
+            time.sleep(2)      
+
+            SM = Select(driver.find_element_by_id('_supp_MENU_3'))
+            SM.select_by_value('A')
+            time.sleep(2)
+
+            SM = Select(driver.find_element_by_id('_supp_MENU_4'))
+            SM.select_by_value('04')
+            time.sleep(2)
+
+            SM = Select(driver.find_element_by_id('_supp_MENU_5'))
+            SM.select_by_value('B')
+            time.sleep(2)
+
+            SM = Select(driver.find_element_by_id('_supp_MENU_6'))
+            SM.select_by_value('B')
+            time.sleep(2)
+
+            SM = Select(driver.find_element_by_id('_supp_MENU_7'))
+            SM.select_by_value('B')
+            time.sleep(2)
+
+            SM = Select(driver.find_element_by_id('_supp_MENU_8'))
+            SM.select_by_value('A')
+            time.sleep(2)
+
+            SM = Select(driver.find_element_by_id('_supp_MENU_10'))
+            SM.select_by_value('F')
+            time.sleep(2)
+
+            SM = Select(driver.find_element_by_id('_supp_MENU_11'))
+            SM.select_by_value('B')
+            time.sleep(2)
+
+            SM = Select(driver.find_element_by_id('_supp_MENU_12'))
+            SM.select_by_value('A')
+            time.sleep(2)
+
+            SM = Select(driver.find_element_by_id('_supp_MENU_13'))
+            SM.select_by_value('B')
+            time.sleep(2)
+
+            driver.find_element_by_id("_supp_CHECK_4").click()
+
+            driver.find_element_by_id("YESNO_4_yes").click()
+
+            driver.find_element_by_id("YESNO_5_no").click()
+
+            driver.find_element_by_id("YESNO_6_no").click()
+
+            driver.find_element_by_id("YESNO_7_no").click()
+
+            driver.find_element_by_id("YESNO_8_no").click()
+
+            driver.find_element_by_id("YESNO_9_no").click()
+
+            driver.find_element_by_name("_eventId_continue").click()
+        
         print(fg + ' (Success)')
 
         print(fc + sd + '[' + fm + sb + '*' + fc + sd + '] ' + fy + 'Details Progress - 8/8', end='')
@@ -1028,13 +1155,15 @@ def main():
     userEmail = input()
 
     time.sleep(0.4)
-
-    print('\n' + fc + sd + '[' + fm + sb + '*' + fc + sd + '] ' + fg + 'Hold on Starting now, Keep checking this terminal for instructions')
+    
+    print('\n' + fc + sd + '[' + fm + sb + '*' + fc + sd + '] ' + fg + 'Performing Incapsula Bypass')
+    fg_lp = EduHelper(clg_ids[userInput])
+    start_url, cookies, token = fg_lp._tryHarder()
 
     time.sleep(1)
     reg_url = start_url + clg_ids[userInput]
     
-    start_bot(reg_url, userEmail, allColleges[userInput], userInput + 1)
+    start_bot(start_url, userEmail, allColleges[userInput], userInput + 1, cookies, token)
 
 if __name__ == '__main__':
     main()
