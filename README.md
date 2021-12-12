@@ -1,7 +1,9 @@
 # Edu-Mail-Generator
 Generate Free Edu Mail(s) within minutes
 
-## Update v0.1.0 ##
+This bot can make 20 different USA college edu mail automatically within 5min.
+
+## Update v0.1.1 ##
 - Incapsula/VPN detected bypassed (No more VPN/Proxy Error) :)
 
 - Added Undetectable Chrome to easily verify recaptcha(No more boring and long verification), just install chrome/chromium on your machine and select chrome_undetected in setup.py and run the bot :)
