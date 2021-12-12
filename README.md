@@ -6,8 +6,6 @@ Generate Free Edu Mail(s) within minutes
 
 - Added Undetectable Chrome to easily verify recaptcha(No more boring and long verification), just install chrome/chromium on your machine and select chrome_undetected in setup.py and run the bot :)
 
-Currently this bot can create 20 Different Clg edu mails.
-
 ## Only For Educational Purpose ##
 ## ***Requirements***
 
