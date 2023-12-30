@@ -1,5 +1,7 @@
 # [DEPRICATED]
 
+If any one want to contribute on this to restart this project contact me on telegram : @MrStarkXD
+
 # Edu-Mail-Generator
 Generate Free Edu Mail(s) within minutes
 
